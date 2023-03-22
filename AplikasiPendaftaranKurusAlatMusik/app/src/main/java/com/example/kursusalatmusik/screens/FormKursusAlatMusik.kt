@@ -74,7 +74,7 @@ fun FormKursusAlatMusik(kursusAlatMusikDao: KursusAlatMusikDao) {
                 placeholder = { Text(text = "Laki - laki / Perempuan") }
             )
             OutlinedTextField(
-                label = { Text(text = "Hp") },
+                label = { Text(text = "Nomor Telepon") },
                 value = nohp.value,
                 onValueChange = {
                     nohp.value = it
@@ -162,7 +162,6 @@ fun FormKursusAlatMusik(kursusAlatMusikDao: KursusAlatMusikDao) {
                         Toast.makeText(context, "Hari Harus Diisi", Toast.LENGTH_SHORT).show()
                         return@Button
                     }
-
                     val id = uuid4().toString()
                     val item = KursusAlatMusik(
                         id, nama.value.text, jeniskelamin.value.text,
@@ -172,17 +171,13 @@ fun FormKursusAlatMusik(kursusAlatMusikDao: KursusAlatMusikDao) {
                         kursusAlatMusikDao.insertAll(item)
                     }
 
-
-
                     nama.value = TextFieldValue("")
                     jeniskelamin.value = TextFieldValue("")
                     nohp.value = TextFieldValue("")
                     selectedalatmusik = ("")
                     harikursus.value = TextFieldValue("")
 
-
-                }, colors = loginButtonColors) {
-                    Text(
+                }, colors = loginButtonColors) { Text(
                         text = "Simpan",
                         style = TextStyle(
                             color = Color.White,
@@ -190,9 +185,7 @@ fun FormKursusAlatMusik(kursusAlatMusikDao: KursusAlatMusikDao) {
                         ), modifier = Modifier.padding(8.dp)
                     )
                 }
-                Button(
-                        modifier = Modifier.weight(10f),
-
+                Button(modifier = Modifier.weight(10f),
                     onClick = {
                     nama.value = TextFieldValue("")
                     jeniskelamin.value = TextFieldValue("")

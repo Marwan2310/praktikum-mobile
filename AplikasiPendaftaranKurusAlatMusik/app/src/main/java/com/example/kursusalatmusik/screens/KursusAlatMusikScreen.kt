@@ -74,7 +74,7 @@ fun KursusAlatMusikScreen() {
                     Column(modifier = Modifier.weight(3f)) {
                         Text(text = "Hari", fontSize = 14.sp)
                         Text(
-                            text = "${item.selectedjamkursus} ", fontSize = 16.sp,
+                            text = "${item.harikursus} ", fontSize = 16.sp,
                             fontWeight = FontWeight.Bold
                         )
                     }

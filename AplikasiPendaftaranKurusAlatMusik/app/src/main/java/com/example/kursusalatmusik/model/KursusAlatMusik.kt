@@ -9,5 +9,5 @@ data class KursusAlatMusik(
     val jeniskelamin: String,
     val nohp: String,
     val selectedalatmusik : String,
-    val selectedjamkursus : String,
+    val harikursus : String,
 )
