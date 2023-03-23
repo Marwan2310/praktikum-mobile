@@ -1,4 +1,5 @@
 package id.ac.unpas.functionalcompose.screen
+
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
@@ -8,21 +9,22 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import id.ac.unpas.functionalcompose.model.KursusMusik
-import id.ac.unpas.functionalcompose.persistences.KursusMusikDao
+import id.ac.unpas.functionalcompose.model.SetoranSampah
+import id.ac.unpas.functionalcompose.persistences.SetoranSampahDao
 import id.ac.unpas.functionalcompose.ui.theme.Purple700
 import id.ac.unpas.functionalcompose.ui.theme.Teal200
 import com.benasher44.uuid.uuid4
 import kotlinx.coroutines.launch
 
 @Composable
-fun FormPencatatanSampah(kursusMusikDao: KursusMusikDao) {
+fun FormPencatatanSampah(setoranSampahDao: SetoranSampahDao) {
     val scope = rememberCoroutineScope()
     val tanggal = remember { mutableStateOf(TextFieldValue("")) }
     val nama = remember { mutableStateOf(TextFieldValue("")) }
@@ -73,10 +75,10 @@ fun FormPencatatanSampah(kursusMusikDao: KursusMusikDao) {
             Button(modifier = Modifier.weight(5f), onClick = {
 
                 val id = uuid4().toString()
-                val item = KursusMusik(id, tanggal.value.text, nama.value.text,
+                val item = SetoranSampah(id, tanggal.value.text, nama.value.text,
                     berat.value.text)
                 scope.launch {
-                    kursusMusikDao.insertAll(item)
+                    setoranSampahDao.insertAll(item)
                 }
                 tanggal.value = TextFieldValue("")
                 nama.value = TextFieldValue("")

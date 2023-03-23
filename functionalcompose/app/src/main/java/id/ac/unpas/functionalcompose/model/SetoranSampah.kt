@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class KursusMusik(
+data class SetoranSampah(
     @PrimaryKey val id: String,
     val tanggal: String,
     val nama: String,
