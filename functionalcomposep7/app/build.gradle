@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace 'id.ac.unpas.functionalcomposep7'
+    namespace 'id.ac.unpas.functionalcompose8'
     compileSdk 33
 
     defaultConfig {
-        applicationId "id.ac.unpas.functionalcomposep7"
+        applicationId "id.ac.unpas.functionalcompose8"
         minSdk 24
         targetSdk 33
         versionCode 1
