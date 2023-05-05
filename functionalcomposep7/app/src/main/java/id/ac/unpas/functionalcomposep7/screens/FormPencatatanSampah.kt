@@ -15,6 +15,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
@@ -30,6 +31,10 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun FormPencatatanSampah() {
+    val isLoading = remember { mutableStateOf(false) }
+    val buttonLabel = if (isLoading.value) "Mohon tunggu..." else
+        "Simpan"
+
     val viewModel = hiltViewModel<PengelolaanSampahViewModel>()
     val scope = rememberCoroutineScope()
     val tanggal = remember { mutableStateOf(TextFieldValue("")) }
@@ -82,7 +87,7 @@ fun FormPencatatanSampah() {
 
                 val id = uuid4().toString()
                 scope.launch {
-                    viewModel.insert(id, tanggal.value.text, nama.value.text,
+                    viewModel.insert(tanggal.value.text, nama.value.text,
                         berat.value.text)
                     tanggal.value = TextFieldValue("")
                     nama.value = TextFieldValue("")
@@ -92,7 +97,7 @@ fun FormPencatatanSampah() {
 
             }, colors = loginButtonColors) {
                 Text(
-                    text = "Simpan",
+                    text = buttonLabel,
                     style = TextStyle(
                         color = Color.White,
                         fontSize = 18.sp
@@ -113,5 +118,9 @@ fun FormPencatatanSampah() {
                 )
             }
         }
+    }
+
+    viewModel.isLoading.observe(LocalLifecycleOwner.current) {
+        isLoading.value = it
     }
 }

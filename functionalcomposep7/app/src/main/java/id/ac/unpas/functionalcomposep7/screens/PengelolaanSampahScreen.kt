@@ -1,5 +1,6 @@
 package id.ac.unpas.functionalcomposep7.screen
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -9,18 +10,26 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import id.ac.unpas.functionalcomposep7.model.SetoranSampah
 import id.ac.unpas.functionalcomposep7.screens.PengelolaanSampahViewModel
+import kotlinx.coroutines.launch
 
 @Composable
-fun PengelolaanSampahScreen() {
+
+fun PengelolaanSampahScreen () {
+    val scope = rememberCoroutineScope()
+    val context = LocalContext.current
     val viewModel = hiltViewModel<PengelolaanSampahViewModel>()
     val items: List<SetoranSampah> by viewModel.list.observeAsState(initial =
     listOf())
@@ -61,4 +70,19 @@ fun PengelolaanSampahScreen() {
             })
         }
     }
+
+    LaunchedEffect(scope) {
+        viewModel.loadItems()
+    }
+    viewModel.success.observe(LocalLifecycleOwner.current) {
+        if (it) {
+            scope.launch {
+                viewModel.loadItems()
+            }
+        }
+    }
+    viewModel.toast.observe(LocalLifecycleOwner.current) {
+        Toast.makeText(context, it, Toast.LENGTH_LONG).show()
+    }
+
 }
