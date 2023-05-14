@@ -39,7 +39,7 @@ fun PengelolaanSampahScreen(navController : NavHostController, modifier: Modifie
 
     Column(modifier = modifier.fillMaxWidth()) {
         Button(onClick = {
-            navController.navigate("tambah-pencatatan-sampah")
+            navController.navigate("tambah-pengelolaan-sampah")
         }) {
             Text(text = "Tambah")
         }
