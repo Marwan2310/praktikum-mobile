@@ -1,9 +1,11 @@
 # praktikum-mobile
-Praktikum Mobile Semester 6
 
-Anggota : 
-Farriz Brilliant Wicaksana
-Paiz Abdul Jabar
-Marwan Hakim
-Dika Sulaeman Akbar
-Muhamad Rafliansyah
+<details>
+  <summary>Praktikum Mobile Semester 6</summary>
+  <p>Anggota : </p>
+  <p>Farriz Brilliant Wicaksana</p>
+  <p>Paiz Abdul Jabar</p>
+  <p>Marwan Hakim</p>
+  <p>Dika Sulaeman Akbar</p>
+  <p>Muhamad Rafliansyah</p>
+</details>
