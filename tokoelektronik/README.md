@@ -1,19 +1,14 @@
-git-download
-==================
+# TUGAS BESAR PRAKTIKUM PEMROGRAMAN MOBILE 
 
-Downloads a remote git repository into a directory or into a `tar` file. Provides a wrapper around the `git archive` command, executing a command like this from node:
+<header>
+  <bold><p>Anggota : </p></bold>
+  <p>Farriz Brilliant Wicaksana</p>
+  <p>Paiz Abdul Jabar</p>
+  <p>Marwan Hakim</p>
+  <p>Dika Sulaeman Akbar</p>
+  <p>Muhamad Rafliansyah</p>
+</header>
 
-```
-git archive --format=tar --remote=ssh://hostname/user/reponame.git branch:folder | tar xf -
-```
-
-**NOTE:** Github does not support `git archive`, so this package does not work with Github repos. This package can be used to download git repositories from private git servers as well as Atlassian Stash and Bitbucket. It may be enhanced to add github support in the future using a different download method.
-
-# Installation
-
-```
-npm install git-download --save
-```
 
 # Usage
 
