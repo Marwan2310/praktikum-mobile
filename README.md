@@ -1,8 +1,8 @@
 # praktikum-mobile
 
 <header>
-  <summary>Praktikum Mobile Semester 6</summary>
-  <p>Anggota : </p>
+  <title>Praktikum Mobile Semester 6</title>
+  <p><bold>Anggota : </p></bold>
   <p>Farriz Brilliant Wicaksana</p>
   <p>Paiz Abdul Jabar</p>
   <p>Marwan Hakim</p>
