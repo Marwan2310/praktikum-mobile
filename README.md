@@ -2,7 +2,6 @@
 Praktikum Mobile Semester 6
 
 Anggota : 
-
 Farriz Brilliant Wicaksana
 Paiz Abdul Jabar
 Marwan Hakim
