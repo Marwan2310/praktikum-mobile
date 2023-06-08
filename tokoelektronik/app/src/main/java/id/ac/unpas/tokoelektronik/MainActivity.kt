@@ -6,34 +6,35 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import dagger.hilt.android.AndroidEntryPoint
+import id.ac.unpas.tokoelektronik.screens.MainScreen
 import id.ac.unpas.tokoelektronik.ui.theme.TokoelektronikTheme
-import id.ac.unpas.tokoelektronik.screens.PengelolaanPeriferalScreen
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            TokoelektronikTheme {
-                // A surface container using the 'background' color from the
-                theme
+            TokoelektronikTheme() {
+                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    PengelolaanPeriferalScreen()
+                    MainScreen()
                 }
             }
         }
     }
 }
+
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    TokoelektronikTheme {
-        PengelolaanPeriferalScreen()
+    TokoelektronikTheme() {
+        MainScreen()
     }
 }

@@ -1,0 +1,204 @@
+package id.ac.unpas.tokoelektronik.screens
+
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
+import id.ac.unpas.tokoelektronik.ui.theme.Purple700
+import id.ac.unpas.tokoelektronik.ui.theme.Teal200
+import id.ac.unpas.tokoelektronik.screens.KomputerViewModel
+import kotlinx.coroutines.launch
+@Composable
+fun FormKomputerScreen(navController :
+                               NavHostController, id: String? = null, modifier: Modifier =
+                                   Modifier) {
+    val viewModel = hiltViewModel<KomputerViewModel>()
+    val merk = remember{ mutableStateOf(TextFieldValue("")) }
+    val jenis = remember { mutableStateOf(TextFieldValue("")) }
+    val harga = remember { mutableStateOf(TextFieldValue("")) }
+    val dapatDiupgradeOptions = listOf("Yes", "No")
+    val dapat_diupgrade = remember { mutableStateOf(TextFieldValue("")) }
+    val spesifikasi = remember { mutableStateOf(TextFieldValue("")) }
+    val isLoading = remember { mutableStateOf(false) }
+    val buttonLabel = if (isLoading.value) "Mohon tunggu..."
+    else "Simpan"
+    val scope = rememberCoroutineScope()
+    Column(modifier = modifier
+        .fillMaxWidth()) {
+        OutlinedTextField(
+            label = { Text(text = "Merek") },
+            value = merk.value,
+            onValueChange = {
+                merk.value = it
+            },
+            modifier = Modifier
+                .padding(4.dp)
+                .fillMaxWidth(),
+            placeholder = { Text(text = "merek") }
+        )
+
+        OutlinedTextField(
+            label = { Text(text = "Jenis") },
+            value = jenis.value,
+            onValueChange = {
+                jenis.value = it
+            },
+            modifier = Modifier
+                .padding(4.dp)
+                .fillMaxWidth(),
+            keyboardOptions = KeyboardOptions(capitalization =
+            KeyboardCapitalization.Characters, keyboardType =
+            KeyboardType.Text),
+            placeholder = { Text(text = "jenis") }
+        )
+        OutlinedTextField(
+            label = { Text(text = "Harga") },
+            value = harga.value,
+            onValueChange = {
+                harga.value = it
+            },
+            modifier = Modifier
+                .padding(4.dp)
+                .fillMaxWidth(),
+            keyboardOptions = KeyboardOptions(keyboardType =
+            KeyboardType.Decimal),
+            placeholder = { Text(text = "5") }
+        )
+
+        // Existing code...
+
+        // Dropdown for "Dapat Diupgrade"
+        Row(modifier = Modifier.padding(4.dp).fillMaxWidth()) {
+            Text(text = "Dapat Diupgrade")
+            Spacer(modifier = Modifier.width(8.dp))
+            DropdownMenu(
+                modifier = Modifier.fillMaxWidth(),
+                expanded = dapat_diupgrade.value.text.isNotEmpty(),
+                onDismissRequest = { /* Empty */ }
+            ) {
+                dapatDiupgradeOptions.forEach { option ->
+                    DropdownMenuItem(
+                        onClick = {
+                            dapat_diupgrade.value = TextFieldValue(option)
+                        }
+                    ) {
+                        Text(text = option)
+                    }
+                }
+            }
+            OutlinedTextField(
+                value = dapat_diupgrade.value,
+                onValueChange = { value ->
+                    dapat_diupgrade.value = value
+                },
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(start = 8.dp)
+            )
+        }
+
+        OutlinedTextField(
+            label = { Text(text = "Spesifikasi") },
+            value = spesifikasi.value,
+            onValueChange = {
+                spesifikasi.value = it
+            },
+            modifier = Modifier
+                .padding(4.dp)
+                .fillMaxWidth(),
+            keyboardOptions = KeyboardOptions(capitalization =
+            KeyboardCapitalization.Characters, keyboardType =
+            KeyboardType.Text),
+            placeholder = { Text(text = "Upgrade") }
+        )
+
+        val loginButtonColors = ButtonDefaults.buttonColors(
+            backgroundColor = Purple700,
+            contentColor = Teal200
+        )
+        val resetButtonColors = ButtonDefaults.buttonColors(
+            backgroundColor = Teal200,
+            contentColor = Purple700
+        )
+        Row (modifier = Modifier
+            .padding(4.dp)
+            .fillMaxWidth()) {
+            Button(modifier = Modifier.weight(5f), onClick = {
+                if (id == null) {
+                    scope.launch {
+                        viewModel.insert(merk.value.text,
+                            jenis.value.text,
+                            harga.value.text.toInt(),
+                            dapat_diupgrade.value.text.toBoolean(),
+                            spesifikasi.value.text)
+                    }
+                } else {
+                    scope.launch {
+                        viewModel.update(id,
+                            merk.value.text,
+                            jenis.value.text,
+                            harga.value.text.toInt(),
+                            dapat_diupgrade.value.text.toBoolean(),
+                            spesifikasi.value.text
+                        )
+                    }
+                }
+                navController.navigate("komputer")
+            }, colors = loginButtonColors) {
+                Text(
+                    text = buttonLabel,
+                    style = TextStyle(
+                        color = Color.White,
+                        fontSize = 18.sp
+                    ), modifier = Modifier.padding(8.dp)
+                )
+            }
+            Button(modifier = Modifier.weight(5f), onClick = {
+                merk.value = TextFieldValue("")
+                jenis.value = TextFieldValue("")
+                harga.value = TextFieldValue("")
+                dapat_diupgrade.value = TextFieldValue("")
+                spesifikasi.value = TextFieldValue("")
+            }, colors = resetButtonColors) {
+                Text(
+                    text = "Reset",
+                    style = TextStyle(
+                        color = Color.White,
+                        fontSize = 18.sp
+                    ), modifier = Modifier.padding(8.dp)
+                )
+            }
+        }
+    }
+    viewModel.isLoading.observe(LocalLifecycleOwner.current) {
+        isLoading.value = it
+    }
+    if (id != null) {
+        LaunchedEffect(scope) {
+            viewModel.loadItem(id) { komputer ->
+                komputer?.let {
+                    merk.value  = TextFieldValue(komputer.merk)
+                    jenis.value = TextFieldValue(komputer.jenis)
+                    harga.value = TextFieldValue(komputer.harga.toString())
+                    dapat_diupgrade.value = TextFieldValue(komputer.dapat_diupgrade.toString())
+                    spesifikasi.value = TextFieldValue(komputer.spesifikasi)
+                }
+            }
+        }
+    }
+}
