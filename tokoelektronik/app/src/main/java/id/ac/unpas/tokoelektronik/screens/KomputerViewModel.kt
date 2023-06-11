@@ -38,7 +38,7 @@ class KomputerViewModel @Inject constructor(private val komputerRepository: Komp
         merk: String,
         jenis: String,
         harga: Int,
-        dapat_diupgrade: Boolean,
+        dapat_diupgrade: String,
         spesifikasi: String
     ) {
         _isLoading.postValue(true)
@@ -66,10 +66,10 @@ class KomputerViewModel @Inject constructor(private val komputerRepository: Komp
         merk: String,
         jenis: String,
         harga: Int,
-        dapat_diupgrade: Boolean,
+        dapat_diupgrade: String,
         spesifikasi: String,
 
-    ) {
+        ) {
         _isLoading.postValue(true)
         komputerRepository.update(id,merk, jenis, harga, dapat_diupgrade, spesifikasi,
                 onError = { item, message ->
@@ -81,6 +81,20 @@ class KomputerViewModel @Inject constructor(private val komputerRepository: Komp
         }
 
         )
+    }
+
+
+    suspend fun delete(id: String) {
+        _isLoading.postValue(true)
+        komputerRepository.delete(id, onError = { message ->
+            _toast.postValue(message)
+            _isLoading.postValue(false)
+            _success.postValue(true)
+        }, onSuccess = {
+            _toast.postValue("Data berhasil dihapus")
+            _isLoading.postValue(false)
+            _success.postValue(true)
+        })
     }
 }
 

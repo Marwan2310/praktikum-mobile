@@ -1,13 +1,13 @@
 package id.ac.unpas.tokoelektronik.di
 
 import android.content.Context
+import id.ac.unpas.tokoelektronik.networks.KomputerApi
 import com.skydoves.sandwich.coroutines.CoroutinesResponseCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import id.ac.unpas.tokoelektronik.networks.KomputerApi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -19,8 +19,7 @@ import javax.inject.Singleton
 object NetworkModule {
     @Provides
     @Singleton
-    fun provideOkHttpClient(@ApplicationContext context:
-                            Context): OkHttpClient {
+    fun provideOkHttpClient(@ApplicationContext context: Context): OkHttpClient {
         return OkHttpClient.Builder()
             //Hanya untuk development/debug. Tidak disarankan untuk produksi.
             .addInterceptor(HttpLoggingInterceptor().apply {
@@ -28,6 +27,7 @@ object NetworkModule {
             })
             .build()
     }
+
     @Provides
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
@@ -37,18 +37,16 @@ object NetworkModule {
                 "https://ppm-api.gusdya.net/"
             )
             .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(
-                CoroutinesResponseCallAdapterFactory()
-            )
+            .addCallAdapterFactory(CoroutinesResponseCallAdapterFactory())
             .build()
     }
 
-   //Komputer API
+//    Komputer
     @Provides
     @Singleton
-    fun provideKomputerApi(retrofit: Retrofit)
-           : KomputerApi
-    {
+    fun provideKomputerApi(retrofit: Retrofit): KomputerApi {
         return retrofit.create(KomputerApi::class.java)
     }
+
+
 }

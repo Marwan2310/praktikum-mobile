@@ -21,106 +21,112 @@ class KomputerRepository @Inject constructor(
     ) {
         val list: List<Komputer> = dao.getList()
         api.all()
-        // handle the case when the API request gets a success response.
-                .suspendOnSuccess {
-            data.whatIfNotNull {
-                it.data?.let { list ->
-                    dao.insertAll(list)
-                    val items: List<Komputer> =
-                        dao.getList()
-                    onSuccess(items)
+// handle the case when the API request gets a success response.
+            .suspendOnSuccess {
+                data.whatIfNotNull {
+                    it.data?.let { list ->
+                        dao.insertAll(list)
+                        val items: List<Komputer> = dao.getList()
+                        onSuccess(items)
+                    }
                 }
             }
-        }
-        // handle the case when the API request gets an error response.
-                // e.g. internal server error.
-        .suspendOnError {
-            onError(list, message())
-        }
-        // handle the case when the API request gets an exception response.
-                // e.g. network connection error.
-         .suspendOnException {
-            onError(list, message())
-        }
+// handle the case when the API request gets an error response.
+// e.g. internal server error.
+            .suspendOnError {
+                onError(list, message())
+            }
+// handle the case when the API request gets an exception response.
+// e.g. network connection error.
+            .suspendOnException {
+                onError(list, message())
+            }
     }
     suspend fun insert(
-        merk: String,
-        jenis: String,
-        harga: Int,
-        dapat_diupgrade: Boolean,
-        spesifikasi: String,
+        merk : String,
+        jenis : String,
+        harga : Int,
+        dapat_diupgrade : String,
+        spesifikasi : String,
+
         onSuccess: (Komputer) -> Unit,
         onError: (Komputer?, String) -> Unit
     ) {
         val id = uuid4().toString()
-        val item = Komputer(id, merk, jenis, harga, dapat_diupgrade, spesifikasi)
+        val item = Komputer(id,merk, jenis, harga, dapat_diupgrade, spesifikasi)
         dao.insertAll(item)
         api.insert(item)
-        // handle the case when the API request gets a success response.
-                .suspendOnSuccess {
-            onSuccess(item)
-        }
-        // handle the case when the API request gets an error response.
-                // e.g. internal server error.
-                .suspendOnError {
-            onError(item, message())
-        }
-        // handle the case when the API request gets an exception response.
-                // e.g. network connection error.
-                .suspendOnException {
-            onError(item, message())
-        }
-
+// handle the case when the API request gets a success response.
+            .suspendOnSuccess {
+                onSuccess(item)
+            }
+// handle the case when the API request gets an rror response.
+// e.g. internal server error.
+            .suspendOnError {
+                onError(item, message())
+            }
+// handle the case when the API request gets an xception response.
+// e.g. network connection error.
+            .suspendOnException {
+                onError(item, message())
+            }
     }
     suspend fun update(
-        id: String,
-        merk: String,
-        jenis: String,
-        harga: Int,
-        dapat_diupgrade: Boolean,
-        spesifikasi: String,
+        id : String,
+        merk : String,
+        jenis : String,
+        harga : Int,
+        dapat_diupgrade : String,
+        spesifikasi : String,
+
+
         onSuccess: (Komputer) -> Unit,
         onError: (Komputer?, String) -> Unit
     ) {
-        val item = Komputer(id, merk, jenis, harga, dapat_diupgrade, spesifikasi )
+        val item = Komputer(id, merk, jenis, harga, dapat_diupgrade, spesifikasi)
         dao.insertAll(item)
         api.update(id, item)
-        // handle the case when the API request gets a success response.
-                .suspendOnSuccess {
-            onSuccess(item)
-        }
-        // handle the case when the API request gets an error response.
-                // e.g. internal server error.
-                .suspendOnError {
-            onError(item, message())
-        }
-        // handle the case when the API request gets an exception response.
-                // e.g. network connection error.
-                .suspendOnException {
-            onError(item, message())
-        }
+// handle the case when the API request gets a success response.
+            .suspendOnSuccess {
+                onSuccess(item)
+            }
+// handle the case when the API request gets an rror response.
+// e.g. internal server error.
+            .suspendOnError {
+                onError(item, message())
+            }
+// handle the case when the API request gets an exception response.
+// e.g. network connection error.
+            .suspendOnException {
+                onError(item, message())
+            }
     }
-    suspend fun delete(id: String, onSuccess: () -> Unit,
-                       onError: (String) -> Unit) {
+
+    suspend fun delete(
+        id: String,
+        onSuccess: () -> Unit,
+        onError: (String) -> Unit
+    ) {
         dao.delete(id)
         api.delete(id)
-        // handle the case when the API request gets a success response.
-                .suspendOnSuccess {
-            data.whatIfNotNull {
-                onSuccess()
+// handle the case when the API request gets a uccess response.
+            .suspendOnSuccess {
+                data.whatIfNotNull {
+                    onSuccess()
+                }
             }
-        }
-        // handle the case when the API request gets an error response.
-        // e.g. internal server error.
-        .suspendOnError {
-            onError(message())
-        }
-        // handle the case when the API request gets an exception response.
-                // e.g. network connection error.
-                .suspendOnException {
-            onError(message())
-        }
+// handle the case when the API request gets an error response.
+// e.g. internal server error.
+            .suspendOnError {
+                onError(message())
+            }
+// handle the case when the API request gets an exception response.
+// e.g. network connection error.
+            .suspendOnException {
+                onError(message())
+            }
     }
+
     suspend fun find(id: String) : Komputer? {
         return dao.find(id)
     }

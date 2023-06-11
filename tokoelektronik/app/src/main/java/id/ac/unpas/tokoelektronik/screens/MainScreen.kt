@@ -152,13 +152,13 @@ fun MainScreen() {
                     FormKomputerScreen(navController =
                     navController, modifier = Modifier.padding(innerPadding))
                 }
-                composable("edit-pengelolaan-sampah/{id}",
+                composable("edit-komputer/{id}",
                     listOf(
                         navArgument("id") {
                             type = NavType.StringType
                         }
                     )) { backStackEntry ->
-                    title.value = "Edit Pengelolaan Sampah"
+                    title.value = "Edit Komputer"
                     val id = backStackEntry.arguments?.getString("id")
                         ?: return@composable
                     FormKomputerScreen(navController =

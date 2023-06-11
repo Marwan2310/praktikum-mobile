@@ -28,31 +28,37 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun DrawerContent(onClick: (String) -> Unit)
-{
+fun DrawerContent (onClick: (String) -> Unit){
     val menus = listOf(
         Menu.HOME,
         Menu.KOMPUTER,
-        Menu.SETTING)
+        Menu.SETTING,
+
+    )
+
     val listState = rememberLazyListState()
-    Column(
-        modifier = Modifier
-            .background(MaterialTheme.colors.background)
+    Column (
+        modifier = Modifier.background(MaterialTheme.colors.background)
     ) {
-        Row (modifier = Modifier.fillMaxWidth().padding(5.dp),
+        Row (modifier = Modifier
+            .fillMaxWidth()
+            .padding(5.dp),
             horizontalArrangement = Arrangement.Center) {
             Text("Selamat Datang", modifier =
-            Modifier.height(32.dp).padding(2.dp),
+            Modifier
+                .height(32.dp)
+                .padding(2.dp),
                 fontSize = 18.sp,
                 fontWeight = FontWeight.SemiBold)
         }
-        Divider(startIndent = 8.dp, thickness = 1.dp, color =
-        Color.Black)
+
+        Divider(startIndent = 8.dp, thickness = 1.dp, color = Color.Black)
+
         LazyColumn(
             state = listState,
             contentPadding = PaddingValues(0.dp)
-        ) {
-            items(menus) { menu ->
+        ){
+            items(menus) {menu ->
                 Card(
                     shape = RoundedCornerShape(4.dp),
                     modifier = Modifier
@@ -60,26 +66,31 @@ fun DrawerContent(onClick: (String) -> Unit)
                         .padding(5.dp),
                     contentColor = Color.Black
                 ) {
-                    Row (modifier =
-                    Modifier.padding(5.dp).clickable {
-                        onClick(menu.route)
-                    }) {
+                    Row(
+                        modifier = Modifier
+                            .padding(5.dp)
+                            .clickable {
+                                onClick(menu.route)
+                            }
+                    ) {
                         Icon(
                             menu.icon,
-                            modifier =
-                            Modifier.height(32.dp).width(32.dp),
+                            modifier = Modifier
+                                .height(32.dp)
+                                .width(32.dp),
                             contentDescription = null,
                             tint = Color.Unspecified
                         )
                         Text(
                             stringResource(id = menu.title),
-                            modifier =
-                            Modifier.height(32.dp).padding(2.dp),
+                            modifier = Modifier.height(32.dp).padding(2.dp),
                             fontSize = 18.sp,
-                            fontWeight = FontWeight.SemiBold)
+                            fontWeight = FontWeight.SemiBold
+                        )
                     }
                 }
             }
         }
+
     }
 }

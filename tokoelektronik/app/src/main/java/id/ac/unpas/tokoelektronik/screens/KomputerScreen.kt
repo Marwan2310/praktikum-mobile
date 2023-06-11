@@ -31,8 +31,7 @@ fun KomputerScreen(navController : NavHostController, snackbarHostState: Snackba
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
     val viewModel = hiltViewModel<KomputerViewModel>()
-    val items: List<Komputer> by viewModel.list.observeAsState(initial =
-    listOf())
+    val items: List<Komputer> by viewModel.list.observeAsState(initial = listOf())
 
     Column(modifier = modifier.fillMaxWidth()) {
         Button(onClick = {
@@ -43,53 +42,14 @@ fun KomputerScreen(navController : NavHostController, snackbarHostState: Snackba
 
         LazyColumn(modifier = Modifier.fillMaxWidth()) {
             items(items = items, itemContent = { item ->
-                Row(modifier = Modifier
-                    .padding(15.dp)
-                    .fillMaxWidth().clickable {
-                        navController.navigate("edit-komputer/${item.id}")
-                    }) {
-                    Column(modifier = Modifier.weight(3f)) {
-                        Text(text = "Merek", fontSize = 14.sp)
-                        Text(
-                            text = item.merk, fontSize = 16.sp,
-                            fontWeight = FontWeight.Bold
-                        )
-                    }
-                    Column(modifier = Modifier.weight(3f)) {
-                        Text(text = "Nama", fontSize = 14.sp)
-                        Text(
-                            text = item.jenis, fontSize = 16.sp, fontWeight =
-                            FontWeight.Bold
-                        )
-                    }
-                    Column(modifier = Modifier.weight(3f)) {
-                        Text(text = "Harga", fontSize = 14.sp)
-                        Text(
-                            text = "${item.harga} Kg", fontSize = 16.sp,
-                            fontWeight = FontWeight.Bold
-                        )
-                    }
-                    Column(modifier = Modifier.weight(3f)) {
-                        Text(text = "Upgrade", fontSize = 14.sp)
-                        Text(
-                            text = "${item.dapat_diupgrade}", fontSize = 16.sp,
-                            fontWeight = FontWeight.Bold
-                        )
-                    }
-                    Column(modifier = Modifier.weight(3f)) {
-                        Text(text = "Spesifikasi", fontSize = 14.sp)
-                        Text(
-                            text = item.spesifikasi, fontSize = 16.sp, fontWeight =
-                            FontWeight.Bold
-                        )
+                KomputerItem(item = item, navController = navController ) {
+                    scope.launch {
+                        viewModel.delete(it)    //Delete
                     }
                 }
-
-                Divider(modifier = Modifier.fillMaxWidth())
             })
         }
     }
-
     LaunchedEffect(scope) {
         viewModel.loadItems()
     }
@@ -100,12 +60,12 @@ fun KomputerScreen(navController : NavHostController, snackbarHostState: Snackba
             }
         }
     }
+
+
     viewModel.toast.observe(LocalLifecycleOwner.current) {
         scope.launch {
-            snackbarHostState.showSnackbar(it, actionLabel =
-            "Tutup", duration = SnackbarDuration.Long)
+            snackbarHostState.showSnackbar(it, actionLabel = "Tutup", duration = SnackbarDuration.Long)
         }
     }
-
 
 }

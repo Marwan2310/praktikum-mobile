@@ -11,10 +11,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+
 @Composable
-fun BottomNavigationComposable(title : String, onClick: (Menu) -> Unit)
-{
+fun BottomNavigationComposable(title : String, onClick : (Menu) -> Unit){
     val tabs = Menu.values()
+
     BottomNavigation(
         elevation = 15.dp
     ) {
@@ -33,10 +34,8 @@ fun BottomNavigationComposable(title : String, onClick: (Menu) -> Unit)
                         tint = Color.White
                     )
                 },
-                selectedContentColor =
-                LocalContentColor.current,
-                unselectedContentColor =
-                LocalContentColor.current,
+                selectedContentColor = LocalContentColor.current,
+                unselectedContentColor = LocalContentColor.current,
                 modifier = Modifier.padding(8.dp)
             )
         }

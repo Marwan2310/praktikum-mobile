@@ -21,27 +21,25 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import id.ac.unpas.tokoelektronik.ui.theme.Purple700
 import id.ac.unpas.tokoelektronik.ui.theme.Teal200
-import id.ac.unpas.tokoelektronik.screens.KomputerViewModel
 import kotlinx.coroutines.launch
 @Composable
 fun FormKomputerScreen(navController :
                                NavHostController, id: String? = null, modifier: Modifier =
                                    Modifier) {
     val viewModel = hiltViewModel<KomputerViewModel>()
-    val merk = remember{ mutableStateOf(TextFieldValue("")) }
+    val merk = remember { mutableStateOf(TextFieldValue("")) }
     val jenis = remember { mutableStateOf(TextFieldValue("")) }
     val harga = remember { mutableStateOf(TextFieldValue("")) }
-    val dapatDiupgradeOptions = listOf("Yes", "No")
     val dapat_diupgrade = remember { mutableStateOf(TextFieldValue("")) }
     val spesifikasi = remember { mutableStateOf(TextFieldValue("")) }
-    val isLoading = remember { mutableStateOf(false) }
-    val buttonLabel = if (isLoading.value) "Mohon tunggu..."
-    else "Simpan"
     val scope = rememberCoroutineScope()
-    Column(modifier = modifier
+    val isLoading = remember { mutableStateOf(false) }
+    val buttonLabel = if (isLoading.value) "Mohon tunggu..." else "Simpan"
+    Column(modifier = Modifier
+        .padding(10.dp)
         .fillMaxWidth()) {
         OutlinedTextField(
-            label = { Text(text = "Merek") },
+            label = { Text(text = "Merk") },
             value = merk.value,
             onValueChange = {
                 merk.value = it
@@ -49,7 +47,7 @@ fun FormKomputerScreen(navController :
             modifier = Modifier
                 .padding(4.dp)
                 .fillMaxWidth(),
-            placeholder = { Text(text = "merek") }
+            placeholder = { Text(text = "Merk") }
         )
 
         OutlinedTextField(
@@ -61,10 +59,7 @@ fun FormKomputerScreen(navController :
             modifier = Modifier
                 .padding(4.dp)
                 .fillMaxWidth(),
-            keyboardOptions = KeyboardOptions(capitalization =
-            KeyboardCapitalization.Characters, keyboardType =
-            KeyboardType.Text),
-            placeholder = { Text(text = "jenis") }
+            placeholder = { Text(text = "Jenis") }
         )
         OutlinedTextField(
             label = { Text(text = "Harga") },
@@ -75,42 +70,25 @@ fun FormKomputerScreen(navController :
             modifier = Modifier
                 .padding(4.dp)
                 .fillMaxWidth(),
-            keyboardOptions = KeyboardOptions(keyboardType =
-            KeyboardType.Decimal),
-            placeholder = { Text(text = "5") }
+            keyboardOptions = KeyboardOptions(capitalization =
+            KeyboardCapitalization.Characters, keyboardType = KeyboardType.Text),
+            placeholder = { Text(text = "RP.") }
         )
 
-        // Existing code...
 
-        // Dropdown for "Dapat Diupgrade"
-        Row(modifier = Modifier.padding(4.dp).fillMaxWidth()) {
-            Text(text = "Dapat Diupgrade")
-            Spacer(modifier = Modifier.width(8.dp))
-            DropdownMenu(
-                modifier = Modifier.fillMaxWidth(),
-                expanded = dapat_diupgrade.value.text.isNotEmpty(),
-                onDismissRequest = { /* Empty */ }
-            ) {
-                dapatDiupgradeOptions.forEach { option ->
-                    DropdownMenuItem(
-                        onClick = {
-                            dapat_diupgrade.value = TextFieldValue(option)
-                        }
-                    ) {
-                        Text(text = option)
-                    }
-                }
-            }
-            OutlinedTextField(
-                value = dapat_diupgrade.value,
-                onValueChange = { value ->
-                    dapat_diupgrade.value = value
-                },
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(start = 8.dp)
-            )
-        }
+        OutlinedTextField(
+            label = { Text(text = "Dapat Diupgrade") },
+            value = dapat_diupgrade.value,
+            onValueChange = {
+                dapat_diupgrade.value = it
+            },
+            modifier = Modifier
+                .padding(4.dp)
+                .fillMaxWidth(),
+            keyboardOptions = KeyboardOptions(capitalization =
+            KeyboardCapitalization.Characters, keyboardType = KeyboardType.Text),
+            placeholder = { Text(text = "XXXXX") }
+        )
 
         OutlinedTextField(
             label = { Text(text = "Spesifikasi") },
@@ -122,9 +100,8 @@ fun FormKomputerScreen(navController :
                 .padding(4.dp)
                 .fillMaxWidth(),
             keyboardOptions = KeyboardOptions(capitalization =
-            KeyboardCapitalization.Characters, keyboardType =
-            KeyboardType.Text),
-            placeholder = { Text(text = "Upgrade") }
+            KeyboardCapitalization.Characters, keyboardType = KeyboardType.Text),
+            placeholder = { Text(text = "Spesifikasi") }
         )
 
         val loginButtonColors = ButtonDefaults.buttonColors(
@@ -141,19 +118,22 @@ fun FormKomputerScreen(navController :
             Button(modifier = Modifier.weight(5f), onClick = {
                 if (id == null) {
                     scope.launch {
-                        viewModel.insert(merk.value.text,
-                            jenis.value.text,
-                            harga.value.text.toInt(),
-                            dapat_diupgrade.value.text.toBoolean(),
-                            spesifikasi.value.text)
-                    }
-                } else {
-                    scope.launch {
-                        viewModel.update(id,
+                        viewModel.insert(
                             merk.value.text,
                             jenis.value.text,
                             harga.value.text.toInt(),
-                            dapat_diupgrade.value.text.toBoolean(),
+                            dapat_diupgrade.value.text,
+                            spesifikasi.value.text
+                        )
+                    }
+                } else {
+                    scope.launch {
+                        viewModel.update(
+                            id,
+                            merk.value.text,
+                            jenis.value.text,
+                            harga.value.text.toInt(),
+                            dapat_diupgrade.value.text,
                             spesifikasi.value.text
                         )
                     }
@@ -188,14 +168,15 @@ fun FormKomputerScreen(navController :
     viewModel.isLoading.observe(LocalLifecycleOwner.current) {
         isLoading.value = it
     }
+
     if (id != null) {
         LaunchedEffect(scope) {
             viewModel.loadItem(id) { komputer ->
                 komputer?.let {
-                    merk.value  = TextFieldValue(komputer.merk)
+                    merk.value = TextFieldValue(komputer.merk)
                     jenis.value = TextFieldValue(komputer.jenis)
                     harga.value = TextFieldValue(komputer.harga.toString())
-                    dapat_diupgrade.value = TextFieldValue(komputer.dapat_diupgrade.toString())
+                    dapat_diupgrade.value = TextFieldValue(komputer.dapat_diupgrade)
                     spesifikasi.value = TextFieldValue(komputer.spesifikasi)
                 }
             }
