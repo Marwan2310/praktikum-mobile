@@ -1,7 +1,6 @@
 package id.ac.unpas.tokoelektronik.di
 
 import android.content.Context
-import id.ac.unpas.tokoelektronik.networks.KomputerApi
 import com.skydoves.sandwich.coroutines.CoroutinesResponseCallAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -9,6 +8,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
+import id.ac.unpas.tokoelektronik.networks.KomputerApi
+import id.ac.unpas.tokoelektronik.networks.PeriferalApi
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -46,6 +47,13 @@ object NetworkModule {
     @Singleton
     fun provideKomputerApi(retrofit: Retrofit): KomputerApi {
         return retrofit.create(KomputerApi::class.java)
+    }
+    // periferal
+    @Provides
+    @Singleton
+    fun providePeriferalApi(retrofit: Retrofit):
+            PeriferalApi {
+        return retrofit.create(PeriferalApi::class.java)
     }
 
 
