@@ -38,7 +38,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import id.ac.unpas.tokoelektronik.screens.FormKomputerScreen
+import id.ac.unpas.tokoelektronik.screens.FormPeriferalScreen
 
 import id.ac.unpas.tokoelektronik.ui.theme.Purple700
 import kotlinx.coroutines.launch
@@ -147,9 +147,22 @@ fun MainScreen() {
                     scaffoldState.snackbarHostState, modifier =
                     Modifier.padding(innerPadding))
                 }
+                composable("periferal") {
+                    title.value = "Periferal"
+                    PeriferalScreen(navController =
+                    navController, snackbarHostState =
+                    scaffoldState.snackbarHostState, modifier =
+                    Modifier.padding(innerPadding))
+                }
                 composable("tambah-komputer") {
                     title.value = "Tambah Komputer"
                     FormKomputerScreen(navController =
+                    navController, modifier = Modifier.padding(innerPadding))
+                }
+
+                composable("tambah-periferal") {
+                    title.value = "Tambah Periferal"
+                    FormPeriferalScreen(navController =
                     navController, modifier = Modifier.padding(innerPadding))
                 }
                 composable("edit-komputer/{id}",
@@ -162,6 +175,20 @@ fun MainScreen() {
                     val id = backStackEntry.arguments?.getString("id")
                         ?: return@composable
                     FormKomputerScreen(navController =
+                    navController, id = id, modifier =
+                    Modifier.padding(innerPadding))
+                }
+                composable("edit-periferal/{id}",
+                    listOf(
+                        navArgument("id") {
+                            type = NavType.StringType
+                        }
+                    )) { backStackEntry ->
+                    title.value = "Edit Periferal"
+                    val id =
+                        backStackEntry.arguments?.getString("id")
+                            ?: return@composable
+                    FormPeriferalScreen(navController =
                     navController, id = id, modifier =
                     Modifier.padding(innerPadding))
                 }

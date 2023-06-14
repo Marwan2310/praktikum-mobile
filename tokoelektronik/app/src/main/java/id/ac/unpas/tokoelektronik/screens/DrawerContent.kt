@@ -32,6 +32,7 @@ fun DrawerContent (onClick: (String) -> Unit){
     val menus = listOf(
         Menu.HOME,
         Menu.KOMPUTER,
+        Menu.PERIFERAL,
         Menu.SETTING,
 
     )

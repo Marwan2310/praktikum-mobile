@@ -16,6 +16,8 @@ enum class Menu (
     HOME(R.string.home, Icons.Default.Home, "home"),
     KOMPUTER(R.string.komputer,
         Icons.Default.List, "komputer"),
+    PERIFERAL(R.string.periferal,
+        Icons.Default.List, "periferal"),
     SETTING(R.string.setting, Icons.Default.Settings,
         "setting");
     companion object {
@@ -25,6 +27,8 @@ enum class Menu (
                 R.string.home -> HOME
                 R.string.komputer ->
                     KOMPUTER
+                R.string.periferal ->
+                    PERIFERAL
                 else -> SETTING
             }
         }
