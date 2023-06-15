@@ -1,24 +1,12 @@
 package id.ac.unpas.tokoelektronik.screens
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.material.Divider
-import androidx.compose.material.DropdownMenu
-import androidx.compose.material.DropdownMenuItem
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -33,81 +21,86 @@ import com.vanpra.composematerialdialogs.title
 import id.ac.unpas.tokoelektronik.model.Komputer
 
 @Composable
-fun KomputerItem(item: Komputer, navController:
-NavHostController, onDelete: (String) -> Unit) {
+fun KomputerItem (item: Komputer, navController: NavHostController, onDelete: (String) -> Unit) {
     var expanded by remember { mutableStateOf(false) }
     val subMenus = listOf("Edit", "Delete")
     val confirmationDialogState = rememberMaterialDialogState()
-    Column(modifier = Modifier.fillMaxWidth()) {
-        Row(modifier = Modifier
+
+    Card(
+        modifier = Modifier
             .padding(15.dp)
-            .fillMaxWidth()) {
-            Column(modifier = Modifier.weight(3f)) {
-                Text(text = "Merk", fontSize = 14.sp)
-                Text(item.merk, fontSize = 16.sp, fontWeight = FontWeight.Bold)
+            .fillMaxWidth()
+            .clickable {
+                navController.navigate("edit-komputer/" + item.id)
+            },
+        elevation = 4.dp
+    ) {
+        Row(modifier = Modifier.padding(15.dp)) {
+            Column(modifier = Modifier.weight(1f)) {
+                Text(text = "Merk", fontWeight = FontWeight.Bold)
+                Text(text = "Jenis", fontWeight = FontWeight.Bold)
+                Text(text = "Harga", fontWeight = FontWeight.Bold)
+                Text(text = "Dapat Upgrade", fontWeight = FontWeight.Bold)
+                Text(text = "Spesifikasi", fontWeight = FontWeight.Bold)
             }
-
-            Column(modifier = Modifier.weight(3f)) {
-                Text(text = "Jenis", fontSize = 14.sp)
-                Text(text = item.jenis, fontSize = 16.sp,
-                    fontWeight = FontWeight.Bold)
+            Column(modifier = Modifier.weight(1f)) {
+                Text(text = item.merk, fontSize = 16.sp)
+                Text(text = item.jenis, fontSize = 16.sp)
+                Text(text = item.harga.toString(), fontSize = 16.sp)
+                val dapatDiUpgradeText = when (item.dapat_diupgrade) {
+                    0 -> "Tidak"
+                    else -> "Ya"
+                }
+                Text(text = dapatDiUpgradeText, fontSize = 16.sp)
+                Text(text = item.spesifikasi, fontSize = 16.sp)
             }
-
-            Column(modifier = Modifier.weight(3f)) {
-                Text(text = "Harga", fontSize = 14.sp)
-                Text(text = "${item.harga}", fontSize = 16.sp, fontWeight = FontWeight.Bold)
-            }
-
-            Column(modifier = Modifier.weight(3f)) {
-                Text(text = "Dapat Diupgrade", fontSize = 14.sp)
-                Text(text = item.dapat_diupgrade, fontSize = 16.sp,
-                    fontWeight = FontWeight.Bold)
-            }
-
-            Column(modifier = Modifier.weight(3f)) {
-                Text(text = "Spesifikasi", fontSize = 14.sp)
-                Text(text = item.spesifikasi, fontSize = 16.sp, fontWeight = FontWeight.Bold)
-
-            }
-            Icon(
-                Icons.Default.MoreVert,
+            Column(
                 modifier = Modifier
-                    .height(40.dp)
-                    .width(40.dp)
-                    .padding(0.dp)
-                    .weight(1f, true)
-                    .clickable {
-                        expanded = true
-                    },
-                contentDescription = null,
-                tint = Color.Unspecified
-            )
-        }
-        DropdownMenu(
-            expanded = expanded,
-            onDismissRequest = { expanded = false },
-            offset = DpOffset(x = (-66).dp, y = (-10).dp)
-        ) {
-            subMenus.forEachIndexed { _, s ->
-                DropdownMenuItem(onClick = {
-                    expanded = false
-                    when (s) {
-                        "Edit" -> {
-
-                            navController.navigate("edit-komputer/${item.id}")
-
+                    .wrapContentWidth()
+                    .wrapContentHeight()
+            ) {
+                Box(
+                    modifier = Modifier
+                        .width(40.dp)
+                        .height(40.dp)
+                        .clickable {
+                            expanded = true
                         }
-                        "Delete" -> {
-                            confirmationDialogState.show()
+                ) {
+                    Icon(
+                        Icons.Default.MoreVert,
+                        contentDescription = null,
+                        modifier = Modifier
+                            .align(Alignment.Center)
+                            .size(24.dp),
+                        tint = Color.Black
+                    )
+                }
+                DropdownMenu(
+                    expanded = expanded,
+                    onDismissRequest = { expanded = false },
+                    offset = DpOffset(x = (-66).dp, y = (-10).dp)
+                ) {
+                    subMenus.forEachIndexed { _, s ->
+                        DropdownMenuItem(onClick = {
+                            expanded = false
+                            when (s) {
+                                "Edit" -> {
+                                    navController.navigate("edit-komputer/${item.id}")
+                                }
+                                "Delete" -> {
+                                    confirmationDialogState.show()
+                                }
+                            }
+                        }) {
+                            Text(text = s)
                         }
                     }
-                }) {
-                    Text(text = s)
                 }
             }
         }
     }
-    Divider(modifier = Modifier.fillMaxWidth())
+
     MaterialDialog(dialogState = confirmationDialogState,
         buttons = {
             positiveButton("Ya", onClick = {
@@ -116,6 +109,6 @@ NavHostController, onDelete: (String) -> Unit) {
             negativeButton("Tidak")
         }) {
         title(text = "Konfirmasi")
-        message(text = "Apakah anda yakin ingin menghapus data?")
+        message(text = "Yakin Menghapus Data?")
     }
 }

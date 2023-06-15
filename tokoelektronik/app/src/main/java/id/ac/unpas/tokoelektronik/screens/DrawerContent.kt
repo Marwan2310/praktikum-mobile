@@ -30,16 +30,14 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun DrawerContent (onClick: (String) -> Unit){
     val menus = listOf(
-        Menu.HOME,
         Menu.KOMPUTER,
         Menu.PERIFERAL,
-        Menu.SETTING,
+        Menu.SETTING,)
 
-    )
-
-    val listState = rememberLazyListState()
+        val listState = rememberLazyListState()
     Column (
         modifier = Modifier.background(MaterialTheme.colors.background)
+
     ) {
         Row (modifier = Modifier
             .fillMaxWidth()

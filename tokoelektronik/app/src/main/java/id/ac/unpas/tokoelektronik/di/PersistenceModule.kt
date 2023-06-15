@@ -26,18 +26,15 @@ object PersistenceModule {
             .fallbackToDestructiveMigration()
             .build()
     }
-//    Komputer
     @Provides
     @Singleton
     fun provideKomputerDao(appDatabase: AppDatabase): KomputerDao {
-        return appDatabase.komputerDao()
+        return appDatabase.KomputerDao()
     }
     @Provides
     @Singleton
     fun providePeriferalDao(appDatabase: AppDatabase): PeriferalDao {
         return appDatabase.PeriferalDao()
     }
-
-
 
 }

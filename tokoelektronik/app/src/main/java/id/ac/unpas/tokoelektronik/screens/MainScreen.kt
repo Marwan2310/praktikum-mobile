@@ -133,10 +133,8 @@ fun MainScreen() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             NavHost(navController = navController,
-                startDestination = "home") {
-                composable("home") {
-                    HomeScreen()
-                }
+                startDestination = "komputer") {
+
                 composable("setting") {
                     SettingScreen()
                 }

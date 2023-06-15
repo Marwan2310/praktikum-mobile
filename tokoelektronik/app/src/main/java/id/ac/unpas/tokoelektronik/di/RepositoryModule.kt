@@ -12,20 +12,17 @@ import id.ac.unpas.tokoelektronik.persistences.PeriferalDao
 import id.ac.unpas.tokoelektronik.repositories.KomputerRepository
 import id.ac.unpas.tokoelektronik.repositories.PeriferalRepository
 
-
 @Module
 @InstallIn(ViewModelComponent::class)
 object RepositoryModule {
-    //    Komputer
     @Provides
     @ViewModelScoped
-    fun providekomputerRepository(
+    fun provideKomputerRepository(
         api: KomputerApi,
         dao: KomputerDao
     ): KomputerRepository {
         return KomputerRepository(api, dao)
     }
-
     @Provides
     @ViewModelScoped
     fun providePeriferalRepository(

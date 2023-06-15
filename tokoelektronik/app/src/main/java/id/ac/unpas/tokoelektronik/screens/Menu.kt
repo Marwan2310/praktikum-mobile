@@ -13,18 +13,14 @@ enum class Menu (
     val icon: ImageVector,
     val route: String
 ) {
-    HOME(R.string.home, Icons.Default.Home, "home"),
-    KOMPUTER(R.string.komputer,
-        Icons.Default.List, "komputer"),
-    PERIFERAL(R.string.periferal,
-        Icons.Default.List, "periferal"),
+    KOMPUTER(R.string.komputer, Icons.Default.List, "komputer"),
+    PERIFERAL(R.string.periferal, Icons.Default.List, "periferal"),
     SETTING(R.string.setting, Icons.Default.Settings,
         "setting");
     companion object {
         fun getTabFromResource(@StringRes resource: Int) : Menu
         {
             return when (resource) {
-                R.string.home -> HOME
                 R.string.komputer ->
                     KOMPUTER
                 R.string.periferal ->

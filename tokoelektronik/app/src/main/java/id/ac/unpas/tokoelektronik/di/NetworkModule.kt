@@ -8,9 +8,9 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import id.ac.unpas.tokoelektronik.networks.KomputerApi
 import id.ac.unpas.tokoelektronik.networks.PeriferalApi
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -20,12 +20,12 @@ import javax.inject.Singleton
 object NetworkModule {
     @Provides
     @Singleton
-    fun provideOkHttpClient(@ApplicationContext context: Context): OkHttpClient {
+    fun provideOkHttpClient(
+        @ApplicationContext context:
+        Context
+    ): OkHttpClient {
         return OkHttpClient.Builder()
-            //Hanya untuk development/debug. Tidak disarankan untuk produksi.
-            .addInterceptor(HttpLoggingInterceptor().apply {
-                level = HttpLoggingInterceptor.Level.BODY
-            })
+//Hanya untuk development/debug. Tidak disarankan untuk produksi.
             .build()
     }
 
@@ -42,19 +42,17 @@ object NetworkModule {
             .build()
     }
 
-//    Komputer
     @Provides
     @Singleton
-    fun provideKomputerApi(retrofit: Retrofit): KomputerApi {
+    fun provideKomputerApi(retrofit: Retrofit):
+            KomputerApi {
         return retrofit.create(KomputerApi::class.java)
     }
-    // periferal
+
     @Provides
     @Singleton
     fun providePeriferalApi(retrofit: Retrofit):
             PeriferalApi {
         return retrofit.create(PeriferalApi::class.java)
     }
-
-
 }

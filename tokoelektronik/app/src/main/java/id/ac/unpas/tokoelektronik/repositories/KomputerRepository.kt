@@ -7,10 +7,10 @@ import com.skydoves.sandwich.suspendOnException
 import com.skydoves.sandwich.suspendOnSuccess
 import com.skydoves.whatif.whatIfNotNull
 import id.ac.unpas.tokoelektronik.model.Komputer
-import id.ac.unpas.tokoelektronik.persistences.KomputerDao
 import id.ac.unpas.tokoelektronik.networks.KomputerApi
-
+import id.ac.unpas.tokoelektronik.persistences.KomputerDao
 import javax.inject.Inject
+
 class KomputerRepository @Inject constructor(
     private val api: KomputerApi,
     private val dao: KomputerDao
@@ -43,54 +43,23 @@ class KomputerRepository @Inject constructor(
             }
     }
     suspend fun insert(
-        merk : String,
-        jenis : String,
-        harga : Int,
-        dapat_diupgrade : String,
-        spesifikasi : String,
-
+        merk: String,
+        jenis: String,
+        harga: Int,
+        dapat_diupgrade: Int,
+        spesifikasi: String,
         onSuccess: (Komputer) -> Unit,
         onError: (Komputer?, String) -> Unit
     ) {
         val id = uuid4().toString()
-        val item = Komputer(id,merk, jenis, harga, dapat_diupgrade, spesifikasi)
+        val item = Komputer(id, merk, jenis, harga, dapat_diupgrade, spesifikasi)
         dao.insertAll(item)
         api.insert(item)
 // handle the case when the API request gets a success response.
             .suspendOnSuccess {
                 onSuccess(item)
             }
-// handle the case when the API request gets an rror response.
-// e.g. internal server error.
-            .suspendOnError {
-                onError(item, message())
-            }
-// handle the case when the API request gets an xception response.
-// e.g. network connection error.
-            .suspendOnException {
-                onError(item, message())
-            }
-    }
-    suspend fun update(
-        id : String,
-        merk : String,
-        jenis : String,
-        harga : Int,
-        dapat_diupgrade : String,
-        spesifikasi : String,
-
-
-        onSuccess: (Komputer) -> Unit,
-        onError: (Komputer?, String) -> Unit
-    ) {
-        val item = Komputer(id, merk, jenis, harga, dapat_diupgrade, spesifikasi)
-        dao.insertAll(item)
-        api.update(id, item)
-// handle the case when the API request gets a success response.
-            .suspendOnSuccess {
-                onSuccess(item)
-            }
-// handle the case when the API request gets an rror response.
+// handle the case when the API request gets an error response.
 // e.g. internal server error.
             .suspendOnError {
                 onError(item, message())
@@ -102,14 +71,40 @@ class KomputerRepository @Inject constructor(
             }
     }
 
-    suspend fun delete(
+    suspend fun update(
         id: String,
-        onSuccess: () -> Unit,
-        onError: (String) -> Unit
+        merk: String,
+        jenis: String,
+        harga: Int,
+        dapat_diupgrade: Int,
+        spesifikasi: String,
+        onSuccess: (Komputer) -> Unit,
+        onError: (Komputer?, String) -> Unit
     ) {
+        val item = Komputer(id, merk, jenis, harga, dapat_diupgrade, spesifikasi)
+        dao.insertAll(item)
+        api.update(id, item)
+// handle the case when the API request gets a success response.
+            .suspendOnSuccess {
+                onSuccess(item)
+            }
+// handle the case when the API request gets an error response.
+// e.g. internal server error.
+            .suspendOnError {
+                onError(item, message())
+            }
+// handle the case when the API request gets an exception response.
+// e.g. network connection error.
+            .suspendOnException {
+                onError(item, message())
+            }
+    }
+
+    suspend fun delete(id: String, onSuccess: () -> Unit,
+                       onError: (String) -> Unit) {
         dao.delete(id)
         api.delete(id)
-// handle the case when the API request gets a uccess response.
+// handle the case when the API request gets a success response.
             .suspendOnSuccess {
                 data.whatIfNotNull {
                     onSuccess()
@@ -131,4 +126,3 @@ class KomputerRepository @Inject constructor(
         return dao.find(id)
     }
 }
-

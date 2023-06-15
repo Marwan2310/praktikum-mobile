@@ -7,7 +7,7 @@ import id.ac.unpas.tokoelektronik.model.Periferal
 
 @Database(entities = [Komputer::class, Periferal::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun komputerDao(): KomputerDao
+    abstract fun KomputerDao(): KomputerDao
 
     abstract fun PeriferalDao(): PeriferalDao
 }
