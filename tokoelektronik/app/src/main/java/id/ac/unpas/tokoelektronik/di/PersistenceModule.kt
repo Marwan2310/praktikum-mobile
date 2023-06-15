@@ -9,6 +9,7 @@ import dagger.hilt.components.SingletonComponent
 import id.ac.unpas.tokoelektronik.persistences.AppDatabase
 import id.ac.unpas.tokoelektronik.persistences.KomputerDao
 import id.ac.unpas.tokoelektronik.persistences.PeriferalDao
+import id.ac.unpas.tokoelektronik.persistences.SmartphoneDao
 import javax.inject.Singleton
 
 @Module
@@ -35,6 +36,12 @@ object PersistenceModule {
     @Singleton
     fun providePeriferalDao(appDatabase: AppDatabase): PeriferalDao {
         return appDatabase.PeriferalDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideSmartphoneDao(appDatabase: AppDatabase): SmartphoneDao {
+        return appDatabase.SmartphoneDao()
     }
 
 }

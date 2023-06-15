@@ -152,6 +152,13 @@ fun MainScreen() {
                     scaffoldState.snackbarHostState, modifier =
                     Modifier.padding(innerPadding))
                 }
+                composable("smartphone") {
+                    title.value = "Smartphone"
+                    SmartphoneScreen(navController =
+                    navController, snackbarHostState =
+                    scaffoldState.snackbarHostState, modifier =
+                    Modifier.padding(innerPadding))
+                }
                 composable("tambah-komputer") {
                     title.value = "Tambah Komputer"
                     FormKomputerScreen(navController =
@@ -163,6 +170,13 @@ fun MainScreen() {
                     FormPeriferalScreen(navController =
                     navController, modifier = Modifier.padding(innerPadding))
                 }
+
+                composable("tambah-smartphone") {
+                    title.value = "Tambah Smartphone"
+                    FormSmartphoneScreen(navController =
+                    navController, modifier = Modifier.padding(innerPadding))
+                }
+
                 composable("edit-komputer/{id}",
                     listOf(
                         navArgument("id") {
@@ -187,6 +201,20 @@ fun MainScreen() {
                         backStackEntry.arguments?.getString("id")
                             ?: return@composable
                     FormPeriferalScreen(navController =
+                    navController, id = id, modifier =
+                    Modifier.padding(innerPadding))
+                }
+                composable("edit-smartphone/{id}",
+                    listOf(
+                        navArgument("id") {
+                            type = NavType.StringType
+                        }
+                    )) { backStackEntry ->
+                    title.value = "Edit Smartphone"
+                    val id =
+                        backStackEntry.arguments?.getString("id")
+                            ?: return@composable
+                    FormSmartphoneScreen(navController =
                     navController, id = id, modifier =
                     Modifier.padding(innerPadding))
                 }

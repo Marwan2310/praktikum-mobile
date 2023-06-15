@@ -7,10 +7,12 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import id.ac.unpas.tokoelektronik.model.SmartPhone
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import id.ac.unpas.tokoelektronik.networks.KomputerApi
 import id.ac.unpas.tokoelektronik.networks.PeriferalApi
+import id.ac.unpas.tokoelektronik.networks.SmartphoneApi
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -54,5 +56,12 @@ object NetworkModule {
     fun providePeriferalApi(retrofit: Retrofit):
             PeriferalApi {
         return retrofit.create(PeriferalApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSmartphoneApi(retrofit: Retrofit):
+            SmartphoneApi {
+        return retrofit.create(SmartphoneApi::class.java)
     }
 }

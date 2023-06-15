@@ -3,6 +3,7 @@
     <string name="home">Home</string>
     <string name="komputer">Komputer</string>
     <string name="periferal">Periferal</string>
+    <string name="smartphone">Smartphone</string>
     <string name="setting">Setting</string>
 
 </resources>
