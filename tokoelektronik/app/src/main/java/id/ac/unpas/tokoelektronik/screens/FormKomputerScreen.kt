@@ -1,5 +1,6 @@
 package id.ac.unpas.tokoelektronik.screens
 
+import android.widget.CheckBox
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.selection.selectable
@@ -112,7 +113,8 @@ fun FormKomputerScreen(navController : NavHostController, id: String? = null, mo
                 .fillMaxWidth(),
             keyboardOptions = KeyboardOptions(keyboardType =
             KeyboardType.Decimal),
-            placeholder = { Text(text = "Rp. 0") }
+            leadingIcon = { Text(text = "Rp. ")}
+
         )
 
         Row(
@@ -126,13 +128,13 @@ fun FormKomputerScreen(navController : NavHostController, id: String? = null, mo
                         .selectable(
                             selected = (text == dapatDiupgrade),
                             onClick = { setDapatDiupgrade(text) },
-                            role = Role.RadioButton
+                            role = Role.Checkbox
                         )
                         .padding(end = 20.dp)
                 ) {
-                    RadioButton(
-                        selected = (text == dapatDiupgrade),
-                        onClick = { setDapatDiupgrade(text) })
+                    Checkbox(
+                        checked = (text == dapatDiupgrade),
+                        onCheckedChange = { setDapatDiupgrade(text) })
 
                     val dapatDiUpgradeText = when (text) {
                         0 -> "Tidak"
@@ -141,7 +143,7 @@ fun FormKomputerScreen(navController : NavHostController, id: String? = null, mo
                     Text(
                         text = dapatDiUpgradeText,
                         fontSize = 18.sp,
-                        modifier = Modifier.padding(top = 12.dp)
+                        modifier = Modifier.padding(top = 12.dp, start = 8.dp)
                     )
                 }
             }

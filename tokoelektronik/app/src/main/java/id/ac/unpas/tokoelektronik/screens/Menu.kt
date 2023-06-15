@@ -1,23 +1,18 @@
 package id.ac.unpas.tokoelektronik.screens
 
 import androidx.annotation.StringRes
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.List
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.ui.graphics.vector.ImageVector
 import id.ac.unpas.tokoelektronik.R
 
 enum class Menu (
     @StringRes val title: Int,
-    val icon: ImageVector,
+    val icon: Int,
     val route: String
 ) {
-    KOMPUTER(R.string.komputer, Icons.Default.List, "komputer"),
-    PERIFERAL(R.string.periferal, Icons.Default.List, "periferal"),
-    SMARTPHONE(R.string.smartphone, Icons.Default.List, "smartphone"),
-    SETTING(R.string.setting, Icons.Default.Settings,
-        "setting");
+    KOMPUTER(R.string.komputer, R.drawable.baseline_computer_24, "komputer"),
+    PERIFERAL(R.string.periferal, R.drawable.baseline_keyboard_24, "periferal"),
+    SMARTPHONE(R.string.smartphone, R.drawable.baseline_smartphone_24, "smartphone"),
+    ABOUTTEAM(R.string.aboutteam, R.drawable.baseline_people_alt_24, "aboutteam");
     companion object {
         fun getTabFromResource(@StringRes resource: Int) : Menu
         {
@@ -28,7 +23,9 @@ enum class Menu (
                     PERIFERAL
                 R.string.smartphone ->
                     SMARTPHONE
-                else -> SETTING
+                R.string.aboutteam ->
+                    ABOUTTEAM
+                else -> ABOUTTEAM
             }
         }
     }

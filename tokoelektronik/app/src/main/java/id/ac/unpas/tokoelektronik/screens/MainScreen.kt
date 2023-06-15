@@ -135,8 +135,9 @@ fun MainScreen() {
             NavHost(navController = navController,
                 startDestination = "komputer") {
 
-                composable("setting") {
-                    SettingScreen()
+                composable("aboutteam") {
+                    title.value = "About Team"
+                    AboutTeam()
                 }
                 composable("komputer") {
                     title.value = "Komputer"

@@ -1,6 +1,7 @@
 # TUGAS BESAR PRAKTIKUM PEMROGRAMAN MOBILE 
 
 <header>
+  <bold><p>APLIKASI TOKO ELEKTRONIK</p></bold>
   <bold><p>Anggota : </p></bold>
   <p>Farriz Brilliant Wicaksana</p>
   <p>Paiz Abdul Jabar</p>

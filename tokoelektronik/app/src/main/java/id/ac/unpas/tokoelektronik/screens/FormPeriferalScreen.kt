@@ -61,13 +61,14 @@ fun FormPeriferalScreen(navController : NavHostController, id: String? = null, m
             value = harga.value,
             onValueChange = {
                 harga.value = it
+
             },
             modifier = Modifier
                 .padding(4.dp)
                 .fillMaxWidth(),
             keyboardOptions = KeyboardOptions(keyboardType =
             KeyboardType.Decimal),
-            placeholder = { Text(text = "Rp. 0") }
+            leadingIcon = { Text(text = "Rp. ")}
         )
         OutlinedTextField(
             label = { Text(text = "Deskripsi") },

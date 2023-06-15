@@ -22,6 +22,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -33,7 +34,7 @@ fun DrawerContent (onClick: (String) -> Unit){
         Menu.KOMPUTER,
         Menu.PERIFERAL,
         Menu.SMARTPHONE,
-        Menu.SETTING,)
+        Menu.ABOUTTEAM,)
 
         val listState = rememberLazyListState()
     Column (
@@ -73,14 +74,7 @@ fun DrawerContent (onClick: (String) -> Unit){
                                 onClick(menu.route)
                             }
                     ) {
-                        Icon(
-                            menu.icon,
-                            modifier = Modifier
-                                .height(32.dp)
-                                .width(32.dp),
-                            contentDescription = null,
-                            tint = Color.Unspecified
-                        )
+
                         Text(
                             stringResource(id = menu.title),
                             modifier = Modifier.height(32.dp).padding(2.dp),
