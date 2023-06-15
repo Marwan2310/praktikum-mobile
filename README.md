@@ -20,3 +20,6 @@
 
 7.Tampilan tambah dalam menu komputer untuk memilih jenis komputer yang ingin di tambahkan
 ![6](https://github.com/Marwan2310/praktikum-mobile/assets/114034360/e33747b1-c75c-4d77-ba80-70792bdcda02)
+
+8.Tampilan menu Periferal yang menampilkan nama, harga, deskripsi dan jenis dan bagian kanan terdapay titik tiga yang dapat edit sefesifikasi atau hapus
+
