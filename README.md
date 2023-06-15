@@ -13,8 +13,7 @@
 ![3](https://github.com/Marwan2310/praktikum-mobile/assets/114034360/944c65bb-9593-4458-a0ff-ac0bf2533754)
 
 5.Tampilan konfirmasi untuk menghapus data Ya/Tidak
-!
-[4](https://github.com/Marwan2310/praktikum-mobile/assets/114034360/b2c47057-dce9-4ddd-8855-084173856a3e)
+![4](https://github.com/Marwan2310/praktikum-mobile/assets/114034360/b2c47057-dce9-4ddd-8855-084173856a3e)
 
 6.Tampilan menambahkan komputer seperti nama Merk, Jenis, Harga, Spesifikasi
 ![5](https://github.com/Marwan2310/praktikum-mobile/assets/114034360/a1644471-a22d-47d8-85a0-448ceccd6df7)
