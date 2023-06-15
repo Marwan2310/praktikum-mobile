@@ -18,5 +18,5 @@
 6.Tampilan menambahkan komputer seperti nama Merk, Jenis, Harga, Spesifikasi
 ![5](https://github.com/Marwan2310/praktikum-mobile/assets/114034360/a1644471-a22d-47d8-85a0-448ceccd6df7)
 
-7.Tampilan tambah dalam menu komputer untuk memilih jenis komputer
+7.Tampilan tambah dalam menu komputer untuk memilih jenis komputer yang ingin di tambahkan
 ![6](https://github.com/Marwan2310/praktikum-mobile/assets/114034360/e33747b1-c75c-4d77-ba80-70792bdcda02)
