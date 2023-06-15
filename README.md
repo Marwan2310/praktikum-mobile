@@ -22,4 +22,11 @@
 ![6](https://github.com/Marwan2310/praktikum-mobile/assets/114034360/e33747b1-c75c-4d77-ba80-70792bdcda02)
 
 8.Tampilan menu Periferal yang menampilkan nama, harga, deskripsi dan jenis dan bagian kanan terdapay titik tiga yang dapat edit sefesifikasi atau hapus
+![pereferal 1](https://github.com/Marwan2310/praktikum-mobile/assets/114034360/ab80394e-7416-4694-8bfd-5e51b58e78fa)
+
+9.Tampilan menu smartphone yang menampilkan data seperti model, warna, storage, tanggal rilis dan sistem operasi
+![smartphone](https://github.com/Marwan2310/praktikum-mobile/assets/114034360/bbfc7b1f-ee96-432e-8de6-a6fa63b59e76)
+
+10.Tampilan about team yang menampilkan nama nama pada anggota kelompok
+![team](https://github.com/Marwan2310/praktikum-mobile/assets/114034360/3a15603a-756f-4d06-b5db-5380844cbb7a)
 
