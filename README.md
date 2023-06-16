@@ -6,7 +6,7 @@
 2.Tampilan Bagian Komputer dengan terdapat nama Merk, Jenis, Harga, DapatUpgrade, Spesifikasi
 ![kom1](https://github.com/Marwan2310/praktikum-mobile/assets/114034360/3a6612e5-a6fb-4021-8dae-69c93e77c61d)
 
-3.Tampilan komputer terdapat fitur add data dan titik tiga sebelah kanan ada untuk edit nama  
+3.Tampilan komputer terdapat fitur add data dan bulat + sebelah kanan ada untuk edit nama dan delete
 ![edit new](https://github.com/Marwan2310/praktikum-mobile/assets/114034360/f6c60dbc-34bb-4234-9740-1b71121a8a4d)
 
 4.Tampilan edit komputer seperti mengedit nama Merk, Jenis, Harga, DapatUpgrade, Spesifikasi lalu simpan
