@@ -12,7 +12,7 @@
 4.Tampilan edit komputer seperti mengedit nama Merk, Jenis, Harga, DapatUpgrade, Spesifikasi lalu simpan
 ![3](https://github.com/Marwan2310/praktikum-mobile/assets/114034360/944c65bb-9593-4458-a0ff-ac0bf2533754)
 
-5.Tampilan konfirmasi pada menu komputer untuk menghapus data Ya atau Tidak
+5.Tampilan konfirmasi pada menu komputer untuk menghapus data lalu konfirmasi Ya atau Tidak
 ![kompir](https://github.com/Marwan2310/praktikum-mobile/assets/114034360/a82d09f1-326f-41d6-a3ab-615fc7a06bee)
 
 6.Tampilan menambahkan komputer seperti nama Merk, Jenis, Harga, Spesifikasi
