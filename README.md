@@ -21,7 +21,7 @@
 7.Tampilan tambah dalam menu komputer untuk memilih jenis komputer yang ingin di tambahkan
 ![6](https://github.com/Marwan2310/praktikum-mobile/assets/114034360/e33747b1-c75c-4d77-ba80-70792bdcda02)
 
-8.Tampilan menu Periferal yang menampilkan nama, harga, deskripsi dan jenis
+8.Tampilan menu Periferal yang menampilkan tambah data dan data nama, harga, deskripsi, jenis
 ![Pere1](https://github.com/Marwan2310/praktikum-mobile/assets/114034360/944610b3-2212-4749-9f7b-2f64d250e59f)
 
 9.Tampilan menu smartphone yang menampilkan data seperti model, warna, storage, tanggal rilis dan sistem operasi
