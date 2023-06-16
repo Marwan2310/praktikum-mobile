@@ -33,7 +33,7 @@ fun SmartphoneItem (item: SmartPhone, navController: NavHostController, onDelete
             modifier = Modifier
                 .fillMaxWidth()
                 .clickable {
-                    navController.navigate("edit-komputer/${item.id}")
+                    navController.navigate("edit-smartphone/${item.id}")
                 },
             elevation = 4.dp,
             shape = RoundedCornerShape(8.dp),

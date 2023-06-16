@@ -33,7 +33,7 @@ fun PeriferalScreen(navController : NavHostController, modifier: Modifier = Modi
                 .padding(15.dp)
                 .fillMaxWidth(),
             onClick = {
-                navController.navigate("tambah-periferl")
+                navController.navigate("tambah-periferal")
             },
             colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF3700B3)), // Warna latar belakang tombol
             shape = RoundedCornerShape(8.dp) // Bentuk tombol yang melengkung

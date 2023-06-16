@@ -32,7 +32,7 @@ fun PeriferalItem (item: Periferal, navController: NavHostController, onDelete: 
             modifier = Modifier
                 .fillMaxWidth()
                 .clickable {
-                    navController.navigate("edit-komputer/${item.id}")
+                    navController.navigate("edit-periferal/${item.id}")
                 },
             elevation = 4.dp,
             shape = RoundedCornerShape(8.dp),
