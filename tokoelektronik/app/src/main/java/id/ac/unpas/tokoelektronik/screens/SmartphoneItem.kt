@@ -2,8 +2,10 @@ package id.ac.unpas.tokoelektronik.screens
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -25,86 +27,89 @@ fun SmartphoneItem (item: SmartPhone, navController: NavHostController, onDelete
     var expanded by remember { mutableStateOf(false) }
     val subMenus = listOf("Edit", "Delete")
     val confirmationDialogState = rememberMaterialDialogState()
+    Column(modifier = Modifier.padding(horizontal = 15.dp, vertical = 8.dp)) {
 
-    Card(
-        modifier = Modifier
-            .padding(15.dp)
-            .fillMaxWidth()
-            .clickable {
-                navController.navigate("edit-smartphone/" + item.id)
-            },
-        elevation = 4.dp
-    ) {
-        Row(modifier = Modifier.padding(15.dp)) {
-            Column(modifier = Modifier.weight(1f)) {
-                Text(text = "Model", fontWeight = FontWeight.Bold)
-                Text(text = "Warna", fontWeight = FontWeight.Bold)
-                Text(text = "Storage", fontWeight = FontWeight.Bold)
-                Text(text = "Tanggal Rilis", fontWeight = FontWeight.Bold)
-                Text(text = "Sistem Operasi", fontWeight = FontWeight.Bold)
-            }
-            Column(modifier = Modifier.weight(1f)) {
-                Text(text = item.model, fontSize = 16.sp)
-                Text(text = item.warna, fontSize = 16.sp)
-                Text(text = item.storage.toString(), fontSize = 16.sp)
-                Text(text = item.tanggal_rilis, fontSize = 16.sp)
-                Text(text = item.sistem_operasi, fontSize = 16.sp)
-            }
-            Column(
-                modifier = Modifier
-                    .wrapContentWidth()
-                    .wrapContentHeight()
-            ) {
-                Box(
-                    modifier = Modifier
-                        .width(40.dp)
-                        .height(40.dp)
-                        .clickable {
-                            expanded = true
-                        }
-                ) {
-                    Icon(
-                        Icons.Default.MoreVert,
-                        contentDescription = null,
-                        modifier = Modifier
-                            .align(Alignment.Center)
-                            .size(24.dp),
-                        tint = Color.Black
-                    )
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable {
+                    navController.navigate("edit-komputer/${item.id}")
+                },
+            elevation = 4.dp,
+            shape = RoundedCornerShape(8.dp),
+            backgroundColor = Color(0xFF6200EE)
+        ) {
+            Row(modifier = Modifier.padding(15.dp)) {
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(text = "Model", fontWeight = FontWeight.Bold)
+                    Text(text = "Warna", fontWeight = FontWeight.Bold)
+                    Text(text = "Storage", fontWeight = FontWeight.Bold)
+                    Text(text = "Tanggal Rilis", fontWeight = FontWeight.Bold)
+                    Text(text = "Sistem Operasi", fontWeight = FontWeight.Bold)
                 }
-                DropdownMenu(
-                    expanded = expanded,
-                    onDismissRequest = { expanded = false },
-                    offset = DpOffset(x = (-66).dp, y = (-10).dp)
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(text = item.model, fontSize = 16.sp)
+                    Text(text = item.warna, fontSize = 16.sp)
+                    Text(text = item.storage.toString(), fontSize = 16.sp)
+                    Text(text = item.tanggal_rilis, fontSize = 16.sp)
+                    Text(text = item.sistem_operasi, fontSize = 16.sp)
+                }
+                Column(
+                    modifier = Modifier
+                        .wrapContentWidth()
+                        .wrapContentHeight()
                 ) {
-                    subMenus.forEachIndexed { _, s ->
-                        DropdownMenuItem(onClick = {
-                            expanded = false
-                            when (s) {
-                                "Edit" -> {
-                                    navController.navigate("edit-smartphone/${item.id}")
-                                }
-                                "Delete" -> {
-                                    confirmationDialogState.show()
-                                }
+                    Box(
+                        modifier = Modifier
+                            .width(40.dp)
+                            .height(40.dp)
+                            .clickable {
+                                expanded = true
                             }
-                        }) {
-                            Text(text = s)
+                    ) {
+                        Icon(
+                            Icons.Default.AddCircle,
+                            contentDescription = null,
+                            modifier = Modifier
+                                .align(Alignment.Center)
+                                .size(24.dp),
+                            tint = Color.White
+                        )
+                    }
+                    DropdownMenu(
+                        expanded = expanded,
+                        onDismissRequest = { expanded = false },
+                        offset = DpOffset(x = (-66).dp, y = (-10).dp)
+                    ) {
+                        subMenus.forEachIndexed { _, s ->
+                            DropdownMenuItem(onClick = {
+                                expanded = false
+                                when (s) {
+                                    "Edit" -> {
+                                        navController.navigate("edit-smartphone/${item.id}")
+                                    }
+                                    "Delete" -> {
+                                        confirmationDialogState.show()
+                                    }
+                                }
+                            }) {
+                                Text(text = s)
+                            }
                         }
                     }
                 }
             }
         }
-    }
 
-    MaterialDialog(dialogState = confirmationDialogState,
-        buttons = {
-            positiveButton("Ya", onClick = {
-                onDelete(item.id)
-            })
-            negativeButton("Tidak")
-        }) {
-        title(text = "Konfirmasi")
-        message(text = "Yakin Menghapus Data?")
+        MaterialDialog(dialogState = confirmationDialogState,
+            buttons = {
+                positiveButton("Ya", onClick = {
+                    onDelete(item.id)
+                })
+                negativeButton("Tidak")
+            }) {
+            title(text = "Konfirmasi")
+            message(text = "Yakin Menghapus Data?")
+        }
     }
 }

@@ -3,8 +3,10 @@ package id.ac.unpas.tokoelektronik.screens
 import id.ac.unpas.tokoelektronik.model.Periferal
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -25,84 +27,86 @@ fun PeriferalItem (item: Periferal, navController: NavHostController, onDelete: 
     var expanded by remember { mutableStateOf(false) }
     val subMenus = listOf("Edit", "Delete")
     val confirmationDialogState = rememberMaterialDialogState()
-
-    Card(
-        modifier = Modifier
-            .padding(15.dp)
-            .fillMaxWidth()
-            .clickable {
-                navController.navigate("edit-periferal/" + item.id)
-            },
-        elevation = 4.dp
-    ) {
-        Row(modifier = Modifier.padding(15.dp)) {
-            Column(modifier = Modifier.weight(1f)) {
-                Text(text = "Nama", fontWeight = FontWeight.Bold)
-                Text(text = "Harga", fontWeight = FontWeight.Bold)
-                Text(text = "Deskripsi", fontWeight = FontWeight.Bold)
-                Text(text = "Jenis", fontWeight = FontWeight.Bold)
-            }
-            Column(modifier = Modifier.weight(1f)) {
-                Text(text = item.nama, fontSize = 16.sp)
-                Text(text = item.harga.toString(), fontSize = 16.sp)
-                Text(text = item.deskripsi, fontSize = 16.sp)
-                Text(text = item.jenis, fontSize = 16.sp)
-            }
-            Column(
-                modifier = Modifier
-                    .wrapContentWidth()
-                    .wrapContentHeight()
-            ) {
-                Box(
-                    modifier = Modifier
-                        .width(40.dp)
-                        .height(40.dp)
-                        .clickable {
-                            expanded = true
-                        }
-                ) {
-                    Icon(
-                        Icons.Default.MoreVert,
-                        contentDescription = null,
-                        modifier = Modifier
-                            .align(Alignment.Center)
-                            .size(24.dp),
-                        tint = Color.Black
-                    )
+    Column(modifier = Modifier.padding(horizontal = 15.dp, vertical = 8.dp)) {
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable {
+                    navController.navigate("edit-komputer/${item.id}")
+                },
+            elevation = 4.dp,
+            shape = RoundedCornerShape(8.dp),
+            backgroundColor = Color(0xFF6200EE)
+        ) {
+            Row(modifier = Modifier.padding(15.dp)) {
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(text = "Nama", fontWeight = FontWeight.Bold)
+                    Text(text = "Harga", fontWeight = FontWeight.Bold)
+                    Text(text = "Deskripsi", fontWeight = FontWeight.Bold)
+                    Text(text = "Jenis", fontWeight = FontWeight.Bold)
                 }
-                DropdownMenu(
-                    expanded = expanded,
-                    onDismissRequest = { expanded = false },
-                    offset = DpOffset(x = (-66).dp, y = (-10).dp)
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(text = item.nama, fontSize = 16.sp)
+                    Text(text = item.harga.toString(), fontSize = 16.sp)
+                    Text(text = item.deskripsi, fontSize = 16.sp)
+                    Text(text = item.jenis, fontSize = 16.sp)
+                }
+                Column(
+                    modifier = Modifier
+                        .wrapContentWidth()
+                        .wrapContentHeight()
                 ) {
-                    subMenus.forEachIndexed { _, s ->
-                        DropdownMenuItem(onClick = {
-                            expanded = false
-                            when (s) {
-                                "Edit" -> {
-                                    navController.navigate("edit-periferal/${item.id}")
-                                }
-                                "Delete" -> {
-                                    confirmationDialogState.show()
-                                }
+                    Box(
+                        modifier = Modifier
+                            .width(40.dp)
+                            .height(40.dp)
+                            .clickable {
+                                expanded = true
                             }
-                        }) {
-                            Text(text = s)
+                    ) {
+                        Icon(
+                            Icons.Default.AddCircle,
+                            contentDescription = null,
+                            modifier = Modifier
+                                .align(Alignment.Center)
+                                .size(24.dp),
+                            tint = Color.White
+                        )
+                    }
+                    DropdownMenu(
+                        expanded = expanded,
+                        onDismissRequest = { expanded = false },
+                        offset = DpOffset(x = (-66).dp, y = (-10).dp)
+                    ) {
+                        subMenus.forEachIndexed { _, s ->
+                            DropdownMenuItem(onClick = {
+                                expanded = false
+                                when (s) {
+                                    "Edit" -> {
+                                        navController.navigate("edit-periferal/${item.id}")
+                                    }
+                                    "Delete" -> {
+                                        confirmationDialogState.show()
+                                    }
+                                }
+                            }) {
+                                Text(text = s)
+                            }
                         }
                     }
                 }
             }
         }
-    }
 
-    MaterialDialog(dialogState = confirmationDialogState,
-        buttons = {
-            positiveButton("Ya", onClick = {
-                onDelete(item.id)
-            })
-            negativeButton("Tidak")
-        }) {
-        title(text = "Konfirmasi")
-        message(text = "Yakin Menghapus Data?")
+        MaterialDialog(dialogState = confirmationDialogState,
+            buttons = {
+                positiveButton("Ya", onClick = {
+                    onDelete(item.id)
+                })
+                negativeButton("Tidak")
+            }) {
+            title(text = "Konfirmasi")
+            message(text = "Yakin Menghapus Data?")
+        }
     }
 }

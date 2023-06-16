@@ -33,12 +33,14 @@ fun DrawerContent (onClick: (String) -> Unit){
 
     Column(
         modifier = Modifier.background(MaterialTheme.colors.background)
+
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp),
             horizontalArrangement = Arrangement.Center
+
         ) {
             Text(
                 "Elektronik C6",
