@@ -1,12 +1,12 @@
-# praktikum-mobile
+# User Manual Toko Elektronik C6
 
 1.Tampilan menu yang terdapat bagian Komputer, Pereferal, SmartPhone dan AboutTeam
-![menu](https://github.com/Marwan2310/praktikum-mobile/assets/114034360/80de4cbf-c18f-4082-806f-665bff467656)
+![heome2](https://github.com/Marwan2310/praktikum-mobile/assets/76583066/d618ab6f-8544-4942-b592-5d261c16eaef)
 
 2.Tampilan Bagian Komputer dengan terdapat nama Merk, Jenis, Harga, DapatUpgrade, Spesifikasi
 ![1](https://github.com/Marwan2310/praktikum-mobile/assets/114034360/61c52555-86d5-4570-87f8-692a2dc941fc)
 
-3.Tampilan komputer terdapat fitur tambah data dan titik tiga sebelah kanan terdapat fitur untuk edit nama Merk, Jenis, Harga, DapatUpgrade
+3.Tampilan komputer terdapat fitur add data dan titik tiga sebelah kanan ada untuk edit nama  
 ![2](https://github.com/Marwan2310/praktikum-mobile/assets/114034360/2e317dc7-a13d-42e2-9663-5ab2990b2768)
 
 4.Tampilan edit komputer seperti mengedit nama Merk, Jenis, Harga, DapatUpgrade, Spesifikasi lalu simpan atau reset
@@ -28,5 +28,6 @@
 ![smartphone](https://github.com/Marwan2310/praktikum-mobile/assets/114034360/bbfc7b1f-ee96-432e-8de6-a6fa63b59e76)
 
 10.Tampilan about team yang menampilkan nama nama pada anggota kelompok
-![team](https://github.com/Marwan2310/praktikum-mobile/assets/114034360/3a15603a-756f-4d06-b5db-5380844cbb7a)
+![tm](https://github.com/Marwan2310/praktikum-mobile/assets/76583066/7469b1d2-0d70-4d18-b65c-90cc705608fa)
+
 
