@@ -27,7 +27,7 @@
 9.Tampilan menu smartphone yang menampilkan data seperti model, warna, storage, tanggal rilis dan sistem operasi
 ![smartphone](https://github.com/Marwan2310/praktikum-mobile/assets/114034360/bbfc7b1f-ee96-432e-8de6-a6fa63b59e76)
 
-10.Tampilan about team yang menampilkan nama nama pada anggota kelompok
+10.Tampilan about team yang menampilkan baik nama-nama dan juga npm anggota kelompok praktikum C6
 ![tm](https://github.com/Marwan2310/praktikum-mobile/assets/76583066/7469b1d2-0d70-4d18-b65c-90cc705608fa)
 
 
